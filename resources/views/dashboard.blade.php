@@ -1,0 +1,1 @@
+<x-auth title="E Office | Dashboard"></x-auth>
