@@ -22,107 +22,71 @@
                 </a>
             </li>
 
+            <li class="side-nav-item">
+                <a data-bs-toggle="collapse" href="#sidebarSurat" aria-expanded="false"
+                    aria-controls="sidebarSurat" class="side-nav-link">
+                    <i class="uil-envelope-edit"></i>
+                    <span> Surat </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="sidebarSurat">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a href="#">Surat Masuk</a>
+                        </li>
+                        <li>
+                            <a href="#">Surat Keluar</a>
+                        </li>
+                        <li>
+                            <a href="#">E-Memo</a>
+                        </li>
+                        <li>
+                            <a href="#">Notulen</a>
+                        </li>
+                        <li>
+                            <a href="#">Disposisi</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="side-nav-item">
+                <a data-bs-toggle="collapse" href="#sidebarMasterData" aria-expanded="false"
+                    aria-controls="sidebarMasterData" class="side-nav-link">
+                    <i class="uil-database"></i>
+                    <span> Master Data </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="sidebarMasterData">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a href="#">Jabatan</a>
+                        </li>
+                        <li>
+                            <a href="#">Jenis Surat</a>
+                        </li>
+                        <li>
+                            <a href="#">Instansi</a>
+                        </li>
+                        <li>
+                            <a href="#">Rapat</a>
+                        </li>
+                        <li>
+                            <a href="#">Karyawan</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="side-nav-item">
+                <a href="#" class="side-nav-link">
+                    <i class="uil-sign-out-alt"></i>
+                    <span> Logout </span>
+                </a>
+            </li>
 
             @role('admin')
-                <li class="side-nav-item">
-                    <a href="#" class="side-nav-link">
-                        <i class="uil-clipboard-notes"></i>
-                        <span> RUP </span>
-                    </a>
-                </li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="#sidebarProvider" aria-expanded="false"
-                        aria-controls="sidebarProvider" class="side-nav-link">
-                        <i class="uil-user-check"></i>
-                        <span> Akun Penyedia </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarProvider">
-                        <ul class="side-nav-second-level">
-                            <li>
-                                <a href="#">Products</a>
-                            </li>
-                            <li>
-                                <a href="#">Products Details</a>
-                            </li>
-                            <li>
-                                <a href="#">Orders</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="#sidebarNonProvider" aria-expanded="false"
-                        aria-controls="sidebarNonProvider" class="side-nav-link">
-                        <i class="uil-user-times"></i>
-                        <span> Akun Non Penyedia </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarNonProvider">
-                        <ul class="side-nav-second-level">
-                            <li>
-                                <a href="#">Products</a>
-                            </li>
-                            <li>
-                                <a href="#">Products Details</a>
-                            </li>
-                            <li>
-                                <a href="#">Orders</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="side-nav-item">
-                    <a href="#" class="side-nav-link">
-                        <i class="uil-database"></i>
-                        <span> Master Data </span>
-                    </a>
-                </li>
-
-                <li class="side-nav-item">
-                    <a href="#" class="side-nav-link">
-                        <i class="uil-files-landscapes-alt"></i>
-                        <span> Anggaran </span>
-                    </a>
-                </li>
-
-                <li class="side-nav-item">
-                    <a href="#" class="side-nav-link">
-                        <i class="uil-file-alt"></i>
-                        <span> Berita </span>
-                    </a>
-                </li>
-
-                <li class="side-nav-item">
-                    <a href="#" class="side-nav-link">
-                        <i class="uil-rss-alt"></i>
-                        <span> Pengumuman </span>
-                    </a>
-                </li>
-
-                <li class="side-nav-item">
-                    <a href="#" class="side-nav-link">
-                        <i class="uil-file-bookmark-alt"></i>
-                        <span> Kebijakan </span>
-                    </a>
-                </li>
-
-                <li class="side-nav-item">
-                    <a href="#" class="side-nav-link">
-                        <i class="uil-question-circle"></i>
-                        <span> FAQ </span>
-                    </a>
-                </li>
-
-                <li class="side-nav-item">
-                    <a href="#" class="side-nav-link">
-                        <i class="uil-list-ul"></i>
-                        <span> Daftar Hitam </span>
-                    </a>
-                </li>
+                
             @endrole
 
         </ul>

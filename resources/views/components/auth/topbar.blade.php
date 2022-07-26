@@ -22,18 +22,6 @@
 
                 <!-- Item -->
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="mdi mdi-account-circle me-1"></i>
-                    <span>My Account</span>
-                </a>
-
-                <!-- Item -->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="mdi mdi-account-edit me-1"></i>
-                    <span>Settings</span>
-                </a>
-
-                <!-- Item -->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
                     <i class="mdi mdi-logout me-1"></i>
                     <span>Logout</span>
                 </a>

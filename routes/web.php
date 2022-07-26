@@ -14,4 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware('auth')->get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+/* ====================================
+# Auth routes
+==================================== */
+
+require_once __DIR__ . '/auth.php';
