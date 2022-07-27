@@ -21,3 +21,21 @@ Route::middleware('auth')->get('/', [DashboardController::class, 'index'])->name
 ==================================== */
 
 require_once __DIR__ . '/auth.php';
+
+/* ====================================
+# Employee routes
+==================================== */
+
+require_once __DIR__ . '/employee.php';
+
+/* ====================================
+# Job routes
+==================================== */
+
+require_once __DIR__ . '/job.php';
+
+/* ====================================
+# Ajax routes
+==================================== */
+
+require_once __DIR__ . '/ajax.php';

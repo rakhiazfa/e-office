@@ -2,6 +2,8 @@
 
 namespace App\View\Components;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\View\Component;
 
 class Auth extends Component
@@ -12,6 +14,11 @@ class Auth extends Component
     public string $title;
 
     /**
+     * @var User
+     */
+    public User $currentUser;
+
+    /**
      * Create a new component instance.
      *
      * @param string $title
@@ -19,6 +26,7 @@ class Auth extends Component
     public function __construct(string $title)
     {
         $this->title = $title;
+        $this->currentUser = FacadesAuth::user();
     }
 
     /**

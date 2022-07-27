@@ -2,18 +2,24 @@
 
 namespace App\View\Components\Auth;
 
+use App\Models\User;
 use Illuminate\View\Component;
 
 class Topbar extends Component
 {
     /**
+     * @var User
+     */
+    public User $currentUser;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->currentUser = $user;
     }
 
     /**

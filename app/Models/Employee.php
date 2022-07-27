@@ -9,6 +9,12 @@ class Employee extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nik', 'phone', 'ktp', 'ktp_address',
+        'city', 'address', 'place_of_birth', 'date_of_birth',
+        'religion', 'gender', 'blood_group', 'marital_status',
+    ];
+
     /**
      * Get user of employee
      */

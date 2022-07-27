@@ -15,24 +15,28 @@ class JobLevelSeeder extends Seeder
      */
     public function run()
     {
-        $jobLevel = new JobLevel(['name' => 'Direktorat']);
-        $jobLevel->role()->associate(2);
-        $jobLevel->save();
+        $jobLevel1 = new JobLevel(['name' => 'Direktorat']);
+        $jobLevel1->role()->associate(2);
+        $jobLevel1->save();
 
-        $jobLevel = new JobLevel(['name' => 'Divisi']);
-        $jobLevel->role()->associate(3);
-        $jobLevel->save();
+        $jobLevel2 = new JobLevel(['name' => 'Divisi']);
+        $jobLevel2->role()->associate(3);
+        $jobLevel2->parent()->associate($jobLevel1);
+        $jobLevel2->save();
 
-        $jobLevel = new JobLevel(['name' => 'Departement']);
-        $jobLevel->role()->associate(4);
-        $jobLevel->save();
+        $jobLevel3 = new JobLevel(['name' => 'Departement']);
+        $jobLevel3->role()->associate(4);
+        $jobLevel3->parent()->associate($jobLevel2);
+        $jobLevel3->save();
 
-        $jobLevel = new JobLevel(['name' => 'Seksi']);
-        $jobLevel->role()->associate(5);
-        $jobLevel->save();
+        $jobLevel4 = new JobLevel(['name' => 'Seksi']);
+        $jobLevel4->role()->associate(5);
+        $jobLevel4->parent()->associate($jobLevel3);
+        $jobLevel4->save();
 
-        $jobLevel = new JobLevel(['name' => 'Staff']);
-        $jobLevel->role()->associate(6);
-        $jobLevel->save();
+        $jobLevel5 = new JobLevel(['name' => 'Staff']);
+        $jobLevel5->role()->associate(6);
+        $jobLevel5->parent()->associate($jobLevel4);
+        $jobLevel5->save();
     }
 }

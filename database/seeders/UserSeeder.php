@@ -17,65 +17,19 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'name' => 'Asep Surmana',
-            'email' => 'asepsurmana@gmail.com',
-            'password' => Hash::make('asepsurmana'),
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('admin'),
         ]);
 
         $user->assignRole('admin');
 
-        User::create([
-            'name' => 'Fauzan Achmad',
-            'email' => 'fauzan.achmad@gmail.com',
-            'password' => Hash::make('fauzan.achmad'),
+        $user = User::create([
+            'name' => 'Direktur',
+            'email' => 'director@gmail.com',
+            'password' => Hash::make('director'),
         ]);
 
-        User::create([
-            'name' => 'Rakhi Azfa Rifansya',
-            'email' => 'rakhiazfa0421@gmail.com',
-            'password' => Hash::make('rakhiazfa0421'),
-        ]);
-
-        User::create([
-            'name' => 'Reyhan Maulana',
-            'email' => 'reyhan.maulana@gmail.com',
-            'password' => Hash::make('reyhan.maulana'),
-        ]);
-
-        User::create([
-            'name' => 'Ardhito Pramono',
-            'email' => 'ardhitopramono@gmail.com',
-            'password' => Hash::make('ardhitopramono'),
-        ]);
-
-        User::create([
-            'name' => 'Gilang Saputra',
-            'email' => 'gilang.saputra@gmail.com',
-            'password' => Hash::make('gilang.saputra'),
-        ]);
-
-        User::create([
-            'name' => 'Lukman Kurniawan',
-            'email' => 'lukmankurnia01@gmail.com',
-            'password' => Hash::make('lukmankurnia01'),
-        ]);
-
-        User::create([
-            'name' => 'Adjie Tugu Marwanto',
-            'email' => 'adjie.marwanto@gmail.com',
-            'password' => Hash::make('adjie.marwanto'),
-        ]);
-
-        User::create([
-            'name' => 'Hesti Kuniasari',
-            'email' => 'hesti.kurnia@gmail.com',
-            'password' => Hash::make('hesti.kurnia'),
-        ]);
-
-        User::create([
-            'name' => 'Lina Diawati',
-            'email' => 'lina.diawati@gmail.com',
-            'password' => Hash::make('lina.diawati'),
-        ]);
+        $user->assignRole('director');
     }
 }

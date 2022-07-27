@@ -9,6 +9,16 @@ class Job extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
+    /**
+     * Get employees of job
+     */
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'job_id', 'id');
+    }
+
     /**
      * Get level of job
      */
@@ -20,7 +30,7 @@ class Job extends Model
     /**
      * Get job parent
      */
-    public function jobParent()
+    public function parent()
     {
         return $this->belongsTo(Job::class, 'job_id', 'id');
     }
@@ -28,7 +38,7 @@ class Job extends Model
     /**
      * Get job childrens
      */
-    public function jobChildrens()
+    public function childrens()
     {
         return $this->hasMany(Job::class, 'job_id', 'id');
     }

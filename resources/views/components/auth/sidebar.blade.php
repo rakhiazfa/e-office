@@ -50,44 +50,44 @@
                 </div>
             </li>
 
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarMasterData" aria-expanded="false"
-                    aria-controls="sidebarMasterData" class="side-nav-link">
-                    <i class="uil-database"></i>
-                    <span> Master Data </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarMasterData">
-                    <ul class="side-nav-second-level">
-                        <li>
-                            <a href="#">Jabatan</a>
-                        </li>
-                        <li>
-                            <a href="#">Jenis Surat</a>
-                        </li>
-                        <li>
-                            <a href="#">Instansi</a>
-                        </li>
-                        <li>
-                            <a href="#">Rapat</a>
-                        </li>
-                        <li>
-                            <a href="#">Karyawan</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+            @role('admin')
+                
+                <li class="side-nav-item">
+                    <a data-bs-toggle="collapse" href="#sidebarMasterData" aria-expanded="false"
+                        aria-controls="sidebarMasterData" class="side-nav-link">
+                        <i class="uil-database"></i>
+                        <span> Master Data </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarMasterData">
+                        <ul class="side-nav-second-level">
+                            <li>
+                                <a href="{{ route('jobs') }}">Jabatan</a>
+                            </li>
+                            <li>
+                                <a href="#">Jenis Surat</a>
+                            </li>
+                            <li>
+                                <a href="#">Instansi</a>
+                            </li>
+                            <li>
+                                <a href="#">Rapat</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('employees') }}">Karyawan</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+            @endrole
 
             <li class="side-nav-item">
-                <a href="#" class="side-nav-link">
+                <a href="{{ route('logout') }}" class="side-nav-link">
                     <i class="uil-sign-out-alt"></i>
                     <span> Logout </span>
                 </a>
             </li>
-
-            @role('admin')
-                
-            @endrole
 
         </ul>
         <!--- /Sidemenu -->

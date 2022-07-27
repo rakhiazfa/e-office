@@ -19,6 +19,22 @@ class JobLevel extends Model
     }
 
     /**
+     * Get parent of job level
+     */
+    public function parent()
+    {
+        return $this->belongsTo(JobLevel::class, 'job_level_id', 'id');
+    }
+
+    /**
+     * Get children of job level
+     */
+    public function children()
+    {
+        return $this->hasOne(JobLevel::class, 'job_level_id', 'id');
+    }
+
+    /**
      * Get jobs of job level
      */
     public function jobs()

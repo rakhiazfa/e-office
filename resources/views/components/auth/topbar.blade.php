@@ -4,15 +4,10 @@
     <ul class="list-unstyled topbar-menu float-end mb-0">
 
         <li class="dropdown notification-list">
-            <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#"
-                role="button" aria-haspopup="false" aria-expanded="false">
-                <span class="account-user-avatar">
-                    <img src="" class="rounded-circle">
-                </span>
-                <span>
-                    <span class="account-user-name">Dominic Keller</span>
-                    <span class="account-position">Founder</span>
-                </span>
+            <a class="nav-link dropdown-toggle nav-user arrow-none" data-bs-toggle="dropdown" href="#" role="button"
+                aria-haspopup="false" aria-expanded="false">
+                <span class="account-user-name">{{ $currentUser->email }}</span>
+                <span class="account-position">{{ ucfirst($currentUser->getRoleNames()[0]) }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
                 <!-- Item -->
@@ -21,7 +16,7 @@
                 </div>
 
                 <!-- Item -->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="{{ route('logout') }}" class="dropdown-item notify-item">
                     <i class="mdi mdi-logout me-1"></i>
                     <span>Logout</span>
                 </a>

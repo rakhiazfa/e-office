@@ -12,6 +12,9 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Jquery JS -->
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+
     <!-- Hyper CSS -->
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="light-style" />
@@ -29,7 +32,7 @@
     <div class="wrapper">
 
         <!-- Sidebar -->
-        <x-auth.sidebar></x-auth.sidebar>
+        <x-auth.sidebar :user="$currentUser"></x-auth.sidebar>
 
         <!-- Page Content -->
         <div class="content-page">
@@ -37,7 +40,7 @@
             <div class="content">
 
                 <!-- Topbar -->
-                <x-auth.topbar></x-auth.topbar>
+                <x-auth.topbar :user="$currentUser"></x-auth.topbar>
 
                 <!-- Container -->
                 <div class="container-fluid">

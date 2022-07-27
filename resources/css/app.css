@@ -11,7 +11,7 @@
         @apply font-nunito font-light antialiased;
     }
 
-    input {
+    input, select {
         @apply block w-full outline-none;
     }
 
@@ -20,7 +20,7 @@
     }
 
     button {
-        @apply block outline-none;
+        @apply block outline-none font-semibold;
     }
 }
 
@@ -29,6 +29,23 @@
 ============================================== */
 
 @layer components {
-    
-}
+    .custom-wrapper {
+        @apply w-full lg:max-w-[1280px] 2xl:max-w-[1536px] 
+                mx-auto px-4 md:px-12;
+    }
 
+    .field {
+        @apply border text-sm rounded-lg
+                px-3 py-[0.6rem];
+    }
+
+    .invalid {
+        @apply text-xs text-red-500 
+                ml-1 mt-1 -mb-2;
+    }
+
+    .button {
+        @apply text-sm rounded-lg shadow-lg 
+                px-14 py-[0.6rem];
+    }
+}

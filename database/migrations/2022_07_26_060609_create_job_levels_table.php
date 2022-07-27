@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('role_id')->unique();
+            $table->unsignedBigInteger('job_level_id')->unique()->nullable();
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('job_level_id')->references('id')->on('job_levels');
         });
     }
 
