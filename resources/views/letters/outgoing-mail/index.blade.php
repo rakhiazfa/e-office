@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <div class="header-title">Surat Keluar</div>
                     <div class="table-responsive">
-                        <table class="table table-centered whitespace-nowrap mb-0">
+                        <table class="table table-centered mb-0">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -41,8 +41,28 @@
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                
+                            <tbody class="text-xs">
+                                @foreach ($letters as $letter)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $letter->letter_number }}</td>
+                                        <td>{{ $letter->creator->user->name }}</td>
+                                        <td>{{ $letter->company->name }}</td>
+                                        <td>{{ $letter->regarding }}</td>
+                                        <td>{{ $letter->date_of_letter }}</td>
+                                        <td>{{ $letter->status }}</td>
+                                        <td>
+                                            <div class="table-action flex justify-center items-center gap-3">
+                                                <a href="{{ route('outgoing-mails.show', ['id' => $letter->id]) }}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                                <form action="{{ route('outgoing-mails.destroy', ['id' => $letter->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="action-icon" onclick="return confirm('Yakin ingin menghapus surat ini?')"><i class="mdi mdi-delete"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

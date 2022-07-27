@@ -8,7 +8,7 @@
 
 @layer base {
     * {
-        @apply font-nunito font-light antialiased;
+        @apply font-nunito font-normal antialiased;
     }
 
     input, select {

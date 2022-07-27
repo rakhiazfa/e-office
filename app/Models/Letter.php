@@ -39,8 +39,35 @@ class Letter extends Model
         return $this->belongsTo(Employee::class, 'destination_id', 'id');
     }
 
+    /**
+     * Get carbon copy
+     */
     public function carbonCopy()
     {
         return $this->belongsTo(Employee::class, 'copy_id', 'id');
+    }
+
+    /**
+     * Get creator of letter
+     */
+    public function creator()
+    {
+        return $this->belongsTo(Employee::class, 'creator_id', 'id');
+    }
+
+    /**
+     * Get company
+     */
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
+    /**
+     * Get checker of letter
+     */
+    public function checker()
+    {
+        return $this->belongsTo(Employee::class, 'checker_id', 'id');
     }
 }

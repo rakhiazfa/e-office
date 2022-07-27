@@ -86,6 +86,7 @@ class EmployeeController extends Controller
             'ktp_address' => ['required'],
             'city' => ['required'],
             'address' => ['required'],
+            'job_level' => ['required'],
             'job' => ['required'],
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
@@ -93,8 +94,9 @@ class EmployeeController extends Controller
             'password_confirmation' => ['required', 'same:password'],
         ]);
 
+        $job_level_id = $request->input('job_level');
         $job_id = $request->input('job');
-        $role = Job::find($job_id)->jobLevel->role;
+        $role = JobLevel::find($job_level_id)->role;
 
         $superior_id = $request->input('superior', false);
 
@@ -103,6 +105,7 @@ class EmployeeController extends Controller
 
         $employee = new Employee($request->all());
         $employee->user()->associate($user);
+        $employee->jobLevel()->associate($job_level_id);
         $employee->job()->associate($job_id);
 
         if ($superior_id) {

@@ -127,6 +127,9 @@
                                                 <option value="{{ $jobLevel->id }}">{{ $jobLevel->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('job_level')
+                                            <p class="invalid">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="text-xs ml-1">Jabatan</label>

@@ -32,10 +32,10 @@ return new class extends Migration
             $table->date('date_of_letter');
             $table->date('date_of_entry')->nullable();
 
+            $table->unsignedBigInteger('creator_id')->nullable();
             $table->unsignedBigInteger('company_id')->nullable();
             $table->string('recipient_name')->nullable();
-            $table->unsignedBigInteger('first_checker_id')->nullable();
-            $table->unsignedBigInteger('second_checker_id')->nullable();
+            $table->unsignedBigInteger('checker_id')->nullable();
 
             $table->string('note_title')->nullable();
             $table->unsignedBigInteger('meeting_id')->nullable();
@@ -52,9 +52,9 @@ return new class extends Migration
             $table->foreign('copy_id')->references('id')->on('employees');
             $table->foreign('destination_id')->references('id')->on('employees');
 
+            $table->foreign('creator_id')->references('id')->on('employees');
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->foreign('first_checker_id')->references('id')->on('employees');
-            $table->foreign('second_checker_id')->references('id')->on('employees');
+            $table->foreign('checker_id')->references('id')->on('employees');
         });
     }
 

@@ -170,4 +170,30 @@ class JobController extends Controller
 
         return response()->json($jobs);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getJobChildrensByJob($id)
+    {
+        $jobs = Job::find($id)->childrens;
+
+        return response()->json($jobs);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getEmployeesOfJob($id)
+    {
+        $jobs = Job::find($id)->employees()->with('user', 'job')->get();
+
+        return response()->json($jobs);
+    }
 }

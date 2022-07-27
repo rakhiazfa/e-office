@@ -40,6 +40,14 @@ class Employee extends Model
     }
 
     /**
+     * Get employee job level
+     */
+    public function jobLevel()
+    {
+        return $this->belongsTo(JobLevel::class, 'job_level_id', 'id');
+    }
+
+    /**
      * Get employee job
      */
     public function job()

@@ -28,11 +28,13 @@ return new class extends Migration
             $table->string('religion')->nullable();
             $table->enum('marital_status', ['Belum Menikah', 'Menikah', 'Duda / Janda'])->nullable();
             $table->unsignedBigInteger('user_id')->unique();
+            $table->unsignedBigInteger('job_level_id');
             $table->unsignedBigInteger('job_id');
             $table->unsignedBigInteger('superior_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('job_level_id')->references('id')->on('job_levels');
             $table->foreign('job_id')->references('id')->on('jobs');
             $table->foreign('superior_id')->references('id')->on('employees');
         });

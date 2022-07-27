@@ -41,4 +41,12 @@ class JobLevel extends Model
     {
         return $this->hasMany(Job::class, 'job_level_id', 'id');
     }
+
+    /**
+     * Get employees of job level
+     */
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'job_level_id', 'id');
+    }
 }
