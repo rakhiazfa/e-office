@@ -32,19 +32,19 @@
                 <div class="collapse" id="sidebarSurat">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="#">Surat Masuk</a>
+                            <a href="{{ route('incoming-mails') }}">Surat Masuk</a>
                         </li>
                         <li>
-                            <a href="#">Surat Keluar</a>
+                            <a href="{{ route('outgoing-mails') }}">Surat Keluar</a>
                         </li>
                         <li>
-                            <a href="#">E-Memo</a>
+                            <a href="{{ route('memos') }}">E-Memo</a>
                         </li>
                         <li>
-                            <a href="#">Notulen</a>
+                            <a href="{{ route('notulens') }}">Notulen</a>
                         </li>
                         <li>
-                            <a href="#">Disposisi</a>
+                            <a href="{{ route('dispositions') }}">Disposisi</a>
                         </li>
                     </ul>
                 </div>

@@ -15,6 +15,12 @@
     <!-- Jquery JS -->
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 
+    <!-- Select 2 CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}">
+
+    <!-- Select 2 JS -->
+    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
+
     <!-- Hyper CSS -->
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="light-style" />
@@ -77,6 +83,10 @@
         <!-- /Page Content -->
     </div>
     <!-- /Wrapper -->
+
+    <script>
+        $('select.field').select2();
+    </script>
 
     <!-- Hyper JS -->
     <script src="{{ asset('assets/js/vendor.min.js') }}"></script>

@@ -35,6 +35,36 @@ require_once __DIR__ . '/employee.php';
 require_once __DIR__ . '/job.php';
 
 /* ====================================
+# Incoming mail routes
+==================================== */
+
+require_once __DIR__ . '/letters/incoming_mail.php';
+
+/* ====================================
+# Outgoing mail routes
+==================================== */
+
+require_once __DIR__ . '/letters/outgoing_mail.php';
+
+/* ====================================
+# Memo routes
+==================================== */
+
+require_once __DIR__ . '/letters/memo.php';
+
+/* ====================================
+# Notulen routes
+==================================== */
+
+require_once __DIR__ . '/letters/notulen.php';
+
+/* ====================================
+# Disposition routes
+==================================== */
+
+require_once __DIR__ . '/letters/disposition.php';
+
+/* ====================================
 # Ajax routes
 ==================================== */
 

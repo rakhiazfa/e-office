@@ -22,6 +22,10 @@
     button {
         @apply block outline-none font-semibold;
     }
+
+    table thead th {
+        @apply text-sm font-semibold whitespace-nowrap;
+    }
 }
 
 /* ==============================================

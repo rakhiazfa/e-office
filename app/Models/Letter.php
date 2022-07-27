@@ -8,4 +8,39 @@ use Illuminate\Database\Eloquent\Model;
 class Letter extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'letter_number', 'regarding', 'attachment', 'sender_name',
+        'date_of_letter', 'date_of_entry', 'recipient_name', 'note_title',
+        'message', 'status',
+    ];
+
+    /**
+     * Get letter category
+     */
+    public function category()
+    {
+        return $this->belongsTo(LetterCategory::class, 'category_id', 'id');
+    }
+
+    /**
+     * Get type of letter
+     */
+    public function type()
+    {
+        return $this->belongsTo(LetterType::class, 'type_id', 'id');
+    }
+
+    /**
+     * Get destination of letter
+     */
+    public function destination()
+    {
+        return $this->belongsTo(Employee::class, 'destination_id', 'id');
+    }
+
+    public function carbonCopy()
+    {
+        return $this->belongsTo(Employee::class, 'copy_id', 'id');
+    }
 }

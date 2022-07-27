@@ -16,4 +16,12 @@ class LetterCategory extends Model
     {
         return $this->hasMany(LetterType::class, 'category_id', 'id');
     }
+
+    /**
+     * Get letters of category
+     */
+    public function letters()
+    {
+        return $this->hasMany(Letter::class, 'category_id', 'id');
+    }
 }

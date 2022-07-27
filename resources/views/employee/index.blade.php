@@ -47,14 +47,16 @@
                                     <td>{{ $employee->user->name }}</td>
                                     <td>{{ $employee->user->email }}</td>
                                     <td>{{ $employee->job->name }}</td>
-                                    <td class="table-action flex justify-center items-center gap-3">
-                                        <a href="{{ route('employees.show', ['id' => $employee->id]) }}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                        <a href="#" class="action-icon"> <i class="mdi mdi-pencil"></i></a>
-                                        <form action="{{ route('employees.destroy', ['id' => $employee->user->id]) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="action-icon" onclick="return confirm('Yakin ingin menghapus karyawan ini?')"><i class="mdi mdi-delete"></i></button>
-                                        </form>
+                                    <td>
+                                        <div class="table-action flex justify-center items-center gap-3">
+                                            <a href="{{ route('employees.show', ['id' => $employee->id]) }}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                            <a href="#" class="action-icon"> <i class="mdi mdi-pencil"></i></a>
+                                            <form action="{{ route('employees.destroy', ['id' => $employee->user->id]) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="action-icon" onclick="return confirm('Yakin ingin menghapus karyawan ini?')"><i class="mdi mdi-delete"></i></button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach

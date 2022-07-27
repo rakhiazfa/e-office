@@ -150,7 +150,7 @@ class JobController extends Controller
         $job = Job::find($id)->parent()->with('employees', 'employees.user')->first();
 
         while ($job !== null) {
-            array_push($jobs, $job);
+            array_unshift($jobs, $job);
 
             $job = $job->parent()->with('employees', 'employees.user')->first();
         }
