@@ -35,7 +35,6 @@ return new class extends Migration
             $table->unsignedBigInteger('creator_id')->nullable();
             $table->unsignedBigInteger('company_id')->nullable();
             $table->string('recipient_name')->nullable();
-            $table->unsignedBigInteger('checker_id')->nullable();
 
             $table->string('note_title')->nullable();
             $table->unsignedBigInteger('meeting_id')->nullable();
@@ -54,7 +53,6 @@ return new class extends Migration
 
             $table->foreign('creator_id')->references('id')->on('employees');
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->foreign('checker_id')->references('id')->on('employees');
         });
     }
 

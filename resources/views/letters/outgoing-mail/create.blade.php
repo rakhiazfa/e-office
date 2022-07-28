@@ -137,7 +137,7 @@
                                 <div class="row">
                                     <div class="col-12 mb-3">
                                         <label class="text-xs ml-1">Pemeriksa</label>
-                                        <select type="text" class="field multiple" name="checker[]" multiple="multiple">
+                                        <select type="text" class="field multiple" name="checkers[]" multiple="multiple">
                                             <option selected disabled>Pilih Pemeriksa</option>
                                             @foreach ($directors as $director)
                                                 <option value="{{ $director->id }}">{{ $director->job->name }} - {{ $director->user->name }}</option>

@@ -63,8 +63,6 @@ class OutgoingMailController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-
         $request->validate([
             'letter_type' => ['required'],
             'date_of_letter' => ['required'],
@@ -74,7 +72,7 @@ class OutgoingMailController extends Controller
             'regarding' => ['required'],
             'company' => ['required'],
             'recipient_name' => ['required'],
-            'checker' => ['required'],
+            'checkers' => ['required'],
         ]);
 
         $request->merge([
@@ -88,9 +86,10 @@ class OutgoingMailController extends Controller
         $letter->type()->associate($request->input('letter_type'));
         $letter->creator()->associate($request->input('creator'));
         $letter->company()->associate($request->input('company'));
-        $letter->checker()->associate($request->input('checker'));
 
         $letter->save();
+
+        $letter->checkers()->attach($request->input('checkers'));
 
         return redirect()->route('outgoing-mails')->with('success', 'Berhasil manambahkan surat keluar.');
     }
@@ -106,6 +105,8 @@ class OutgoingMailController extends Controller
         $data = [
             'letter' => Letter::with([
                 'type', 'company',
+                'checkers', 'checkers.user',
+                'checkers.job',
             ])->find($id),
         ];
 

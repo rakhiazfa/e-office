@@ -66,8 +66,8 @@ class Letter extends Model
     /**
      * Get checker of letter
      */
-    public function checker()
+    public function checkers()
     {
-        return $this->belongsTo(Employee::class, 'checker_id', 'id');
+        return $this->belongsToMany(Employee::class, 'letter_checkers');
     }
 }

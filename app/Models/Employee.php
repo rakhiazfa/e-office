@@ -54,4 +54,12 @@ class Employee extends Model
     {
         return $this->belongsTo(Job::class, 'job_id', 'id');
     }
+
+    /**
+     * Get the letter that this employee checks
+     */
+    public function letters()
+    {
+        return $this->belongsToMany(Letter::class, 'letter_checkers');
+    }
 }
