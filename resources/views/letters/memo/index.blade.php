@@ -41,8 +41,28 @@
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                
+                            <tbody class="text-xs">
+                                @foreach ($letters as $letter)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>Belum Digenerate</td>
+                                        <td>{{ $letter->creator->user->name }}</td>
+                                        <td>{{ $letter->destination->user->name }}</td>
+                                        <td>{{ $letter->regarding }}</td>
+                                        <td>{{ $letter->date_of_letter }}</td>
+                                        <td>{{ $letter->status }}</td>
+                                        <td>
+                                            <div class="table-action flex justify-center items-center gap-3">
+                                                <a href="{{ route('memos.show', ['id' => $letter->id]) }}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                                <form action="{{ route('memos.destroy', ['id' => $letter->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="action-icon" onclick="return confirm('Yakin ingin menghapus e-memo ini?')"><i class="mdi mdi-delete"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

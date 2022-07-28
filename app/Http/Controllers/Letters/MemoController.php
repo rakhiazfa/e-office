@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Letters;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
+use App\Models\Letter;
+use App\Models\LetterCategory;
 use Illuminate\Http\Request;
 
 class MemoController extends Controller
 {
+    private $letterCategory = 3;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,16 @@ class MemoController extends Controller
      */
     public function index()
     {
-        return view('letters.memo.index');
+        $letters = LetterCategory::find($this->letterCategory)->letters()->with([
+            'creator', 'creator.user',
+            'destination', 'destination.user',
+        ])->orderBy('id', 'DESC')->get();
+
+        $data = [
+            'letters' => $letters,
+        ];
+
+        return view('letters.memo.index', $data);
     }
 
     /**
@@ -24,7 +38,15 @@ class MemoController extends Controller
      */
     public function create()
     {
-        return view('letters.memo.create');
+        $letterTypes = LetterCategory::find($this->letterCategory)->letterTypes;
+        $employees = Employee::with(['user', 'job'])->get();
+
+        $data = [
+            'letterTypes' => $letterTypes,
+            'employees' => $employees,
+        ];
+
+        return view('letters.memo.create', $data);
     }
 
     /**
@@ -35,7 +57,35 @@ class MemoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'date_of_letter' => ['required'],
+            'letter_type' => ['required'],
+            'creator' => ['required'],
+            'destination' => ['required'],
+            'regarding' => ['required'],
+            'message' => ['required'],
+        ]);
+
+        $request->merge([
+            'status' => 'Draft',
+        ]);
+
+        $carbonCopy = $request->input('copy', false);
+
+        $letter = new Letter($request->all());
+
+        $letter->category()->associate($this->letterCategory);
+        $letter->type()->associate($request->input('letter_type'));
+        $letter->creator()->associate($request->input('creator'));
+        $letter->destination()->associate($request->input('destination'));
+
+        if ($carbonCopy) {
+            $letter->carbonCopy()->associate($carbonCopy);
+        }
+
+        $letter->save();
+
+        return redirect()->route('memos')->with('success', 'Berhasil menambahkan e-memo.');
     }
 
     /**
@@ -46,7 +96,16 @@ class MemoController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = [
+            'letter' => Letter::with([
+                'type',
+                'destination', 'destination.user', 'destination.job',
+                'carbonCopy', 'carbonCopy.user', 'carbonCopy.job',
+                'creator', 'creator.user', 'creator.job'
+            ])->find($id),
+        ];
+
+        return view('letters.memo.detail', $data);
     }
 
     /**
@@ -80,6 +139,8 @@ class MemoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Letter::find($id)->delete();
+
+        return redirect()->route('memos')->with('success', 'Berhasil menghapus e-memo.');
     }
 }

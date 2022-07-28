@@ -23,7 +23,7 @@ class OutgoingMailController extends Controller
     {
         $letters = LetterCategory::find($this->letterCategory)->letters()->with([
             'company', 'creator', 'creator.user'
-        ])->get();
+        ])->orderBy('id', 'DESC')->get();
 
         $data = [
             'letters' => $letters,

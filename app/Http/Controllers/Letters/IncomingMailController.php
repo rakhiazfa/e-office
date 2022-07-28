@@ -19,7 +19,7 @@ class IncomingMailController extends Controller
      */
     public function index()
     {
-        $letters = LetterCategory::find($this->letterCategory)->letters;
+        $letters = LetterCategory::find($this->letterCategory)->letters()->orderBy('id', 'DESC')->get();
 
         $data = [
             'letters' => $letters,

@@ -53,7 +53,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="header-title">Penerima</div>
-                    <table class="table table-centered text-xs mb-3">
+                    <table class="table table-bordered table-centered text-xs mb-3">
                         <tbody>
                             <tr>
                                 <td class="font-semibold whitespace-nowrap">Nama Instansi / Lembaga / Perusahaan</td>
@@ -77,14 +77,14 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="table table-centered text-xs mb-0">
+                    <table class="table table-bordered table-centered text-xs mb-0">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Nama Penerima</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-xs">
                             <tr>
                                 <td>1</td>
                                 <td>{{ $letter->recipient_name }}</td>
@@ -110,7 +110,7 @@
                                     <th>Jabatan</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-xs">
                                 @foreach ($letter->checkers as $checker)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
