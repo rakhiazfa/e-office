@@ -29,7 +29,7 @@ return new class extends Migration
             $table->enum('marital_status', ['Belum Menikah', 'Menikah', 'Duda / Janda'])->nullable();
             $table->unsignedBigInteger('user_id')->unique();
             $table->unsignedBigInteger('job_level_id');
-            $table->unsignedBigInteger('job_id');
+            $table->unsignedBigInteger('job_id')->nullable();
             $table->unsignedBigInteger('superior_id')->nullable();
             $table->timestamps();
 
