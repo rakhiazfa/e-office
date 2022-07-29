@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('letter_checkers', function (Blueprint $table) {
+        Schema::create('meeting_members', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('letter_id');
+            $table->unsignedBigInteger('meeting_id');
             $table->unsignedBigInteger('employee_id');
 
-            $table->foreign('letter_id')->references('id')->on('letters')->cascadeOnDelete();
+            $table->foreign('meeting_id')->references('id')->on('meetings')->cascadeOnDelete();
             $table->foreign('employee_id')->references('id')->on('employees')->cascadeOnDelete();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('letter_checkers');
+        Schema::dropIfExists('meeting_members');
     }
 };

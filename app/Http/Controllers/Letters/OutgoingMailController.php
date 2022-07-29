@@ -76,7 +76,6 @@ class OutgoingMailController extends Controller
         ]);
 
         $request->merge([
-            'letter_number' => 'BS/02/KKB/01',
             'status' => 'Draft',
         ]);
 

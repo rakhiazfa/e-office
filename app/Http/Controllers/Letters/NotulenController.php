@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\Letters;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
+use App\Models\JobLevel;
+use App\Models\Letter;
+use App\Models\LetterCategory;
+use App\Models\Meeting;
 use Illuminate\Http\Request;
 
 class NotulenController extends Controller
 {
+    private $letterCategory = 4;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,15 @@ class NotulenController extends Controller
      */
     public function index()
     {
-        return view('letters.notulen.index');
+        $letters = LetterCategory::find($this->letterCategory)->letters()->with([
+            'meeting', 'creator', 'creator.user'
+        ])->orderBy('id', 'DESC')->get();
+
+        $data = [
+            'letters' => $letters,
+        ];
+
+        return view('letters.notulen.index', $data);
     }
 
     /**
@@ -24,7 +39,18 @@ class NotulenController extends Controller
      */
     public function create()
     {
-        return view('letters.notulen.create');
+        $employees = Employee::with(['user', 'job'])->get();
+        $meetings = Meeting::orderBy('id', 'DESC')->get();
+        $directors = JobLevel::find(1)->employees()->with(['user', 'job'])->get();
+
+        $data = [
+            'employees' => $employees,
+            'directors' => $directors,
+            'meetings' => $meetings,
+            'currentDate' => date('Y-m-d'),
+        ];
+
+        return view('letters.notulen.create', $data);
     }
 
     /**
@@ -35,7 +61,30 @@ class NotulenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'note_title' => ['required'],
+            'date_of_letter' => ['required'],
+            'creator' => ['required'],
+            'meeting' => ['required'],
+            'checkers' => ['required'],
+            'message' => ['required'],
+        ]);
+
+        $request->merge([
+            'status' => 'Draft',
+        ]);
+
+        $letter = new Letter($request->all());
+
+        $letter->category()->associate($this->letterCategory);
+        $letter->creator()->associate($request->input('creator'));
+        $letter->meeting()->associate($request->input('meeting'));
+
+        $letter->save();
+
+        $letter->checkers()->attach($request->input('checkers'));
+
+        return redirect()->route('notulens')->with('success', 'Berhasil manambahkan notulen.');
     }
 
     /**
@@ -46,7 +95,15 @@ class NotulenController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = [
+            'letter' => Letter::with([
+                'checkers', 'checkers.user', 'checkers.job',
+                'creator', 'creator.user', 'creator.job',
+                'meeting', 'meeting.members',
+            ])->find($id),
+        ];
+
+        return view('letters.notulen.detail', $data);
     }
 
     /**
@@ -80,6 +137,8 @@ class NotulenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Letter::find($id)->delete();
+
+        return redirect()->route('notulens')->with('success', 'Berhasil menghapus notulen.');
     }
 }

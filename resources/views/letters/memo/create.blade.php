@@ -81,6 +81,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12 mb-3">
+                                <label class="text-xs ml-1">Pesan Memo</label>
                                 <textarea name="message" id="editor"></textarea>
                                 @error('message')
                                     <p class="invalid">{{ $message }}</p>

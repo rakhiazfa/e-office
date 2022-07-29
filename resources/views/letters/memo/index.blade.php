@@ -45,9 +45,9 @@
                                 @foreach ($letters as $letter)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>Belum Digenerate</td>
-                                        <td>{{ $letter->creator->user->name }}</td>
-                                        <td>{{ $letter->destination->user->name }}</td>
+                                        <td>{{ $letter->letter_number ?? "Belum Digenerate" }}</td>
+                                        <td>{{ $letter->creator ? $letter->creator->user->name : "Tidak Ada" }}</td>
+                                        <td>{{ $letter->destination ? $letter->destination->user->name : "Tidak Ada" }}</td>
                                         <td>{{ $letter->regarding }}</td>
                                         <td>{{ $letter->date_of_letter }}</td>
                                         <td>{{ $letter->status }}</td>

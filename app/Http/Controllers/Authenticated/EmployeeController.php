@@ -8,6 +8,7 @@ use App\Models\Job;
 use App\Models\JobLevel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -99,6 +100,10 @@ class EmployeeController extends Controller
         $role = JobLevel::find($job_level_id)->role;
 
         $superior_id = $request->input('superior', false);
+
+        $request->merge([
+            'password' => Hash::make($request->input('password')),
+        ]);
 
         $user = User::create($request->all());
         $user->assignRole($role);

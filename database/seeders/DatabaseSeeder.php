@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             LetterCategorySeeder::class,
             LetterTypeSeeder::class,
             UserSeeder::class,
+            MeetingSeeder::class,
         ]);
     }
 }

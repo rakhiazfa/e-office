@@ -62,4 +62,12 @@ class Employee extends Model
     {
         return $this->belongsToMany(Letter::class, 'letter_checkers');
     }
+
+    /**
+     * Get member meetings
+     */
+    public function meetings()
+    {
+        return $this->belongsToMany(Meeting::class, 'meeting_members');
+    }
 }

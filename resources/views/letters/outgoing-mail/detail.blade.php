@@ -11,14 +11,14 @@
 
     <div class="row">
         <div class="col-md-5">
-            <div class="card">
+            <div class="card h-[calc(100%-1.5rem)]">
                 <div class="card-body">
                     <div class="header-title mb-3">Detail Surat Keluar</div>
                     <table class="table table-centered text-xs mb-0">
                         <tbody>
                             <tr>
                                 <td class="font-semibold whitespace-nowrap">Nomor Surat</td>
-                                <td>{{ $letter->letter_number }}</td>
+                                <td>{{ $letter->letter_number ?? "Belum Digenerate" }}</td>
                             </tr>
                             <tr>
                                 <td class="font-semibold whitespace-nowrap">Jenis Surat</td>
@@ -26,7 +26,7 @@
                             </tr>
                             <tr>
                                 <td class="font-semibold whitespace-nowrap">Pengirim</td>
-                                <td>{{ $letter->creator->user->name }}</td>
+                                <td>{{ $letter->creator ? $letter->creator->job->name . " - " : "Tidak Ada" }} {{ $letter->creator ? $letter->creator->user->name : "" }}</td>
                             </tr>
                             <tr>
                                 <td class="font-semibold whitespace-nowrap">Perihal</td>
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="col-md-7">
-            <div class="card">
+            <div class="card h-[calc(100%-1.5rem)]">
                 <div class="card-body">
                     <div class="header-title">Penerima</div>
                     <table class="table table-bordered table-centered text-xs mb-3">

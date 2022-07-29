@@ -35,7 +35,7 @@ return new class extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('job_level_id')->references('id')->on('job_levels');
-            $table->foreign('job_id')->references('id')->on('jobs');
+            $table->foreign('job_id')->references('id')->on('jobs')->nullOnDelete();
             $table->foreign('superior_id')->references('id')->on('employees');
         });
     }

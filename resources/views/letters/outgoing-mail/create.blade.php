@@ -143,7 +143,7 @@
                                                 <option value="{{ $director->id }}">{{ $director->job->name }} - {{ $director->user->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('checker')
+                                        @error('checkers')
                                             <p class="invalid">{{ $message }}</p>
                                         @enderror
                                     </div>

@@ -47,11 +47,11 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('letter_categories');
             $table->foreign('type_id')->references('id')->on('letter_types');
 
-            $table->foreign('sender_id')->references('id')->on('employees');
-            $table->foreign('copy_id')->references('id')->on('employees');
-            $table->foreign('destination_id')->references('id')->on('employees');
+            $table->foreign('sender_id')->references('id')->on('employees')->nullOnDelete();
+            $table->foreign('copy_id')->references('id')->on('employees')->nullOnDelete();
+            $table->foreign('destination_id')->references('id')->on('employees')->nullOnDelete();
 
-            $table->foreign('creator_id')->references('id')->on('employees');
+            $table->foreign('creator_id')->references('id')->on('employees')->nullOnDelete();
             $table->foreign('company_id')->references('id')->on('companies');
         });
     }

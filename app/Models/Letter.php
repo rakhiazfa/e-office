@@ -64,6 +64,14 @@ class Letter extends Model
     }
 
     /**
+     * Get meeting
+     */
+    public function meeting()
+    {
+        return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
+    }
+
+    /**
      * Get checker of letter
      */
     public function checkers()

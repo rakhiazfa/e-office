@@ -12,7 +12,7 @@
     <div class="flex flex-col xl:flex-row gap-x-5">
         <div class="row w-full xl:w-[800px]">
             <div class="col-12">
-                <div class="card">
+                <div class="card h-[calc(100%-1.5rem)]">
                     <div class="card-body">
                         <div class="header-title mb-3">Detail Surat Masuk</div>
                         <table class="table table-centered text-xs mb-0">
@@ -50,7 +50,7 @@
         
         <div class="row w-full">
             <div class="col-12">
-                <div class="card">
+                <div class="card h-[calc(100%-1.5rem)]">
                     <div class="card-body">
                         <div class="header-title">Penerima</div>
                         <div class="table-responsive">
@@ -65,8 +65,8 @@
                                 <tbody class="text-xs">
                                     <tr>
                                         <td>1</td>
-                                        <td>{{ $letter->destination->user->name }}</td>
-                                        <td>{{ $letter->destination->job->name }}</td>
+                                        <td>{{ $letter->destination ? $letter->destination->user->name : "Tidak Ada" }}</td>
+                                        <td>{{ $letter->destination ? $letter->destination->job->name : "Tidak Ada" }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <div class="card">
+                <div class="card h-[calc(100%-1.5rem)]">
                     <div class="card-body">
                         <div class="header-title">Pegawai CC</div>
                         <div class="table-responsive">
@@ -90,8 +90,8 @@
                                 <tbody class="text-xs">
                                     <tr>
                                         <td>1</td>
-                                        <td>{{ $letter->carbonCopy->user->name }}</td>
-                                        <td>{{ $letter->carbonCopy->job->name }}</td>
+                                        <td>{{ $letter->carbonCopy ? $letter->carbonCopy->user->name : "Tidak Ada" }}</td>
+                                        <td>{{ $letter->carbonCopy ? $letter->carbonCopy->job->name : "Tidak Ada" }}</td>
                                     </tr>
                                 </tbody>
                             </table>

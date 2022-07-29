@@ -41,8 +41,28 @@
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                
+                            <tbody class="text-xs">
+                                @foreach ($letters as $letter)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $letter->letter_number ?? "Belum Digenerate" }}</td>
+                                    <td>{{ $letter->note_title }}</td>
+                                    <td>{{ $letter->creator ? $letter->creator->user->name : "Tidak Ada" }}</td>
+                                    <td>{{ $letter->meeting->meeting_agenda }}</td>
+                                    <td>{{ $letter->date_of_letter }}</td>
+                                    <td>{{ $letter->status }}</td>
+                                    <td>
+                                        <div class="table-action flex justify-center items-center gap-3">
+                                            <a href="{{ route('notulens.show', ['id' => $letter->id]) }}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                            <form action="{{ route('notulens.destroy', ['id' => $letter->id]) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="action-icon" onclick="return confirm('Yakin ingin menghapus surat ini?')"><i class="mdi mdi-delete"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

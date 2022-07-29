@@ -76,6 +76,10 @@
     }
 }
 
+.header-title {
+    @apply font-semibold;
+}
+
 .ck-editor__editable {
     min-height: 300px;
 }
