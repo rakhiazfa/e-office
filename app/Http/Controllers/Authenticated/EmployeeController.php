@@ -136,6 +136,10 @@ class EmployeeController extends Controller
             'subordinates', 'subordinates.user', 'subordinates.job',
         ])->find($id);
 
+        if ($employee) {
+            return abort(404);
+        }
+
         $data = [
             'employee' => $employee,
         ];

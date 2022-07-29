@@ -89,12 +89,18 @@ class IncomingMailController extends Controller
      */
     public function show($id)
     {
+        $letter = Letter::with([
+            'type', 'destination', 'destination.user',
+            'destination.job', 'carbonCopy', 'carbonCopy.user',
+            'carbonCopy.job',
+        ])->find($id);
+
+        if (!$letter) {
+            return abort(404);
+        }
+
         $data = [
-            'letter' => Letter::with([
-                'type', 'destination', 'destination.user',
-                'destination.job', 'carbonCopy', 'carbonCopy.user',
-                'carbonCopy.job',
-            ])->find($id),
+            'letter' => $letter,
         ];
 
         return view('letters.incoming-mail.detail', $data);

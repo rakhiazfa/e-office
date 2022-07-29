@@ -101,12 +101,18 @@ class OutgoingMailController extends Controller
      */
     public function show($id)
     {
+        $letter = Letter::with([
+            'type', 'company',
+            'checkers', 'checkers.user',
+            'checkers.job',
+        ])->find($id);
+
+        if (!$letter) {
+            return abort(404);
+        }
+
         $data = [
-            'letter' => Letter::with([
-                'type', 'company',
-                'checkers', 'checkers.user',
-                'checkers.job',
-            ])->find($id),
+            'letter' => $letter,
         ];
 
         return view('letters.outgoing-mail.detail', $data);

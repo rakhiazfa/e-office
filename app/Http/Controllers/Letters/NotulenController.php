@@ -95,12 +95,18 @@ class NotulenController extends Controller
      */
     public function show($id)
     {
+        $letter = Letter::with([
+            'checkers', 'checkers.user', 'checkers.job',
+            'creator', 'creator.user', 'creator.job',
+            'meeting', 'meeting.members',
+        ])->find($id);
+
+        if (!$letter) {
+            return abort(404);
+        }
+
         $data = [
-            'letter' => Letter::with([
-                'checkers', 'checkers.user', 'checkers.job',
-                'creator', 'creator.user', 'creator.job',
-                'meeting', 'meeting.members',
-            ])->find($id),
+            'letter' => $letter,
         ];
 
         return view('letters.notulen.detail', $data);

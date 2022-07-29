@@ -96,13 +96,19 @@ class MemoController extends Controller
      */
     public function show($id)
     {
+        $letter = Letter::with([
+            'type',
+            'destination', 'destination.user', 'destination.job',
+            'carbonCopy', 'carbonCopy.user', 'carbonCopy.job',
+            'creator', 'creator.user', 'creator.job'
+        ])->find($id);
+
+        if (!$letter) {
+            return abort(404);
+        }
+
         $data = [
-            'letter' => Letter::with([
-                'type',
-                'destination', 'destination.user', 'destination.job',
-                'carbonCopy', 'carbonCopy.user', 'carbonCopy.job',
-                'creator', 'creator.user', 'creator.job'
-            ])->find($id),
+            'letter' => $letter,
         ];
 
         return view('letters.memo.detail', $data);
