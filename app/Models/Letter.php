@@ -78,4 +78,12 @@ class Letter extends Model
     {
         return $this->belongsToMany(Employee::class, 'letter_checkers');
     }
+
+    /**
+     * Get reference from the letter
+     */
+    public function references()
+    {
+        return $this->hasMany(LetterReference::class, 'letter_id', 'id');
+    }
 }

@@ -101,4 +101,32 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="header-title">File Attachement</div>
+                    <div class="table-responsive">
+                        <table class="table table-centered mb-0">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama File</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($letter->references as $reference)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td><a class="text-blue-600" href="{{ asset('storage/'.$reference->file) }}">{{ $reference->file }}</a></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-auth>

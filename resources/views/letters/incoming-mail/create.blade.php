@@ -87,9 +87,16 @@
                                     <p class="invalid">{{ $message }}</p>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <button type="button" class="button bg-blue-500 text-white" id="add-file-input">Tambah Attachment</button>
+                            </div>
+                        </div>
+                        <div class="row" id="attachments">
                             <div class="col-12 mb-3">
                                 <label class="text-xs ml-1">File Attachment</label>
-                                <input type="file" class="form-control" name="attachment">
+                                <input type="file" class="form-control" name="attachments[]">
                                 @error('attachment')
                                     <p class="invalid">{{ $message }}</p>
                                 @enderror
@@ -103,4 +110,16 @@
             </div>
         </div>
     </div>
+    <script>
+        let fileInput = `
+            <div class="col-12 mb-3">
+                <label class="text-xs ml-1">File Attachment</label>
+                <input type="file" class="form-control" name="attachments[]">
+            </div>
+        `;
+
+        $("#add-file-input").click(function(e) {
+            $("#attachments").append(fileInput);
+        });
+    </script>
 </x-auth>

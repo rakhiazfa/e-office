@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\Letter;
 use App\Models\LetterCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MemoController extends Controller
 {
@@ -40,10 +41,26 @@ class MemoController extends Controller
     {
         $letterTypes = LetterCategory::find($this->letterCategory)->letterTypes;
         $employees = Employee::with(['user', 'job'])->get();
+        $references = Letter::all();
+
+        $incomingLetters = collect($references)->filter(function ($letter) {
+            return $letter->category->id === 1;
+        });
+
+        $outgoingLetters = collect($references)->filter(function ($letter) {
+            return $letter->category->id === 2;
+        });
+
+        $memos = collect($references)->filter(function ($letter) {
+            return $letter->category->id === 3;
+        });
 
         $data = [
             'letterTypes' => $letterTypes,
             'employees' => $employees,
+            'incomingLetters' => $incomingLetters,
+            'outgoingLetters' => $outgoingLetters,
+            'memos' => $memos,
         ];
 
         return view('letters.memo.create', $data);
@@ -72,6 +89,14 @@ class MemoController extends Controller
 
         $carbonCopy = $request->input('copy', false);
 
+        $letter_category = LetterCategory::find($this->letterCategory);
+        $destination = Employee::with('user')->find($request->input('destination'));
+
+        $path = 'letters/' . $destination->user->name . '/' . $letter_category->name . '/attachments';
+
+        $references = $request->input('references', false);
+        $attachments = $request->file('attachments');
+
         $letter = new Letter($request->all());
 
         $letter->category()->associate($this->letterCategory);
@@ -84,6 +109,24 @@ class MemoController extends Controller
         }
 
         $letter->save();
+
+        if ($references) {
+            foreach ($references as $reference) {
+                $letter->references()->create([
+                    'reference_id' => $reference,
+                ]);
+            }
+        }
+
+        if ($attachments) {
+            foreach ($attachments as $attachment) {
+                $attachment = $attachment->storeAs($path, date('d M Y H i s') . ' - ' . $attachment->getClientOriginalName(), 'public');
+
+                $letter->references()->create([
+                    'file' => $attachment,
+                ]);
+            }
+        }
 
         return redirect()->route('memos')->with('success', 'Berhasil menambahkan e-memo.');
     }
@@ -100,7 +143,8 @@ class MemoController extends Controller
             'type',
             'destination', 'destination.user', 'destination.job',
             'carbonCopy', 'carbonCopy.user', 'carbonCopy.job',
-            'creator', 'creator.user', 'creator.job'
+            'creator', 'creator.user', 'creator.job',
+            'references', 'references.reference',
         ])->find($id);
 
         if (!$letter) {
@@ -145,7 +189,13 @@ class MemoController extends Controller
      */
     public function destroy($id)
     {
-        Letter::find($id)->delete();
+        $letter = Letter::find($id);
+
+        foreach ($letter->references()->where('file', '!=', null)->get() as $reference) {
+            Storage::disk('public')->delete($reference->file);
+        }
+
+        $letter->delete();
 
         return redirect()->route('memos')->with('success', 'Berhasil menghapus e-memo.');
     }

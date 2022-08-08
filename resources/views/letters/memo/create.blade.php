@@ -13,7 +13,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('memos.store') }}" method="POST">
+                    <form action="{{ route('memos.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -88,6 +88,75 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="incoming-letters-tab" data-bs-toggle="tab" data-bs-target="#incoming-letters" type="button" role="tab" aria-controls="incoming-letters" aria-selected="true">Pesan Masuk</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="outgoing-letters-tab" data-bs-toggle="tab" data-bs-target="#outgoing-letters" type="button" role="tab" aria-controls="outgoing-letters" aria-selected="false">Pesan Keluar</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="memo-tab" data-bs-toggle="tab" data-bs-target="#memo" type="button" role="tab" aria-controls="memo" aria-selected="false">E-Memo</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="file-tab" data-bs-toggle="tab" data-bs-target="#file" type="button" role="tab" aria-controls="file" aria-selected="false">File</button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="incoming-letters" role="tabpanel" aria-labelledby="incoming-letters-tab">
+                                        <div class="row">
+                                            <div class="col-12 mt-3">
+                                                <label class="text-xs ml-1">Lampiran / Referensi</label>
+                                                <select class="field multiple" name="references[]" multiple>
+                                                    @foreach ($incomingLetters as $reference)
+                                                        <option value="{{ $reference->id }}">{{ $reference->letter_number }} | {{ $reference->regarding }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="outgoing-letters" role="tabpanel" aria-labelledby="outgoing-letters-tab">
+                                        <div class="row">
+                                            <div class="col-12 mt-3">
+                                                <label class="text-xs ml-1">Lampiran / Referensi</label>
+                                                <select class="field multiple" name="references[]" multiple>
+                                                    @foreach ($outgoingLetters as $reference)
+                                                        <option value="{{ $reference->id }}">{{ $reference->letter_number }} | {{ $reference->regarding }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="memo" role="tabpanel" aria-labelledby="memo-tab">
+                                        <div class="row">
+                                            <div class="col-12 mt-3">
+                                                <label class="text-xs ml-1">Lampiran / Referensi</label>
+                                                <select class="field multiple" name="references[]" multiple>
+                                                    @foreach ($memos as $reference)
+                                                        <option value="{{ $reference->id }}">{{ $reference->letter_number }} | {{ $reference->regarding }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="file" role="tabpanel" aria-labelledby="file-tab">
+                                        <div class="row">
+                                            <div class="col-12 mt-3">
+                                                <button type="button" class="button bg-blue-500 text-white" id="add-file-input">Tambah Attachment</button>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="attachments">
+                                            <div class="col-12 mt-3">
+                                                <label class="text-xs ml-1">File Attachment</label>
+                                                <input type="file" class="form-control" name="attachments[]">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="flex justify-end">
                             <button type="submit" class="button bg-blue-500 text-white">Submit</button>
                         </div>
@@ -96,4 +165,16 @@
             </div>
         </div>
     </div>
+    <script>
+        let fileInput = `
+            <div class="col-12 mt-3">
+                <label class="text-xs ml-1">File Attachment</label>
+                <input type="file" class="form-control" name="attachments[]">
+            </div>
+        `;
+
+        $("#add-file-input").click(function(e) {
+            $("#attachments").append(fileInput);
+        });
+    </script>
 </x-auth>

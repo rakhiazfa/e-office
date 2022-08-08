@@ -8,6 +8,7 @@ use App\Models\Letter;
 use App\Models\LetterCategory;
 use App\Models\LetterType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class IncomingMailController extends Controller
 {
@@ -63,9 +64,7 @@ class IncomingMailController extends Controller
             'date_of_letter' => ['required'],
             'date_of_entry' => ['required'],
             'destination' => ['required'],
-            'attachement' => ['file'],
         ]);
-
 
         $letter_category = LetterCategory::find($this->letterCategory);
         $destination = Employee::with('user')->find($request->input('destination'));
@@ -73,21 +72,30 @@ class IncomingMailController extends Controller
 
         $path = 'letters/' . $destination->user->name . '/' . $letter_category->name . '/attachments';
 
-        $attachment = $request->file('attachment');
-        $attachment = $attachment->storeAs($path, $attachment->getClientOriginalName(), 'public');
+        $attachments = $request->file('attachments', false);
+
 
         $letter = new Letter($request->all());
 
         $letter->category()->associate($this->letterCategory);
         $letter->type()->associate($request->input('letter_type'));
         $letter->destination()->associate($destination);
-        $letter->attachment = $attachment;
 
         if ($copy) {
             $letter->carbonCopy()->associate($request->input('copy'));
         }
 
         $letter->save();
+
+        if ($attachments) {
+            foreach ($attachments as $attachment) {
+                $attachment = $attachment->storeAs($path, date('d M Y H i s') . ' - ' . $attachment->getClientOriginalName(), 'public');
+
+                $letter->references()->create([
+                    'file' => $attachment,
+                ]);
+            }
+        }
 
         return redirect()->route('incoming-mails')->with('success', 'Berhasil manambahkan surat masuk.');
     }
@@ -103,7 +111,7 @@ class IncomingMailController extends Controller
         $letter = Letter::with([
             'type', 'destination', 'destination.user',
             'destination.job', 'carbonCopy', 'carbonCopy.user',
-            'carbonCopy.job',
+            'carbonCopy.job', 'references', 'references.reference',
         ])->find($id);
 
         if (!$letter) {
@@ -148,7 +156,13 @@ class IncomingMailController extends Controller
      */
     public function destroy($id)
     {
-        Letter::find($id)->delete();
+        $letter = Letter::find($id);
+
+        foreach ($letter->references()->where('file', '!=', null)->get() as $reference) {
+            Storage::disk('public')->delete($reference->file);
+        }
+
+        $letter->delete();
 
         return redirect()->route('incoming-mails')->with('success', 'Berhasil menghapus surat masuk.');
     }

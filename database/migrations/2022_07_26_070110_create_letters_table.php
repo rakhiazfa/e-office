@@ -43,7 +43,6 @@ return new class extends Migration
 
             $table->timestamps();
 
-
             $table->foreign('category_id')->references('id')->on('letter_categories');
             $table->foreign('type_id')->references('id')->on('letter_types');
 

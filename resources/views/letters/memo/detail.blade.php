@@ -76,6 +76,38 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <div class="card-body">
+                    <div class="header-title">Lampiran / Referensi</div>
+                    <div class="table-responsive">
+                        <table class="table table-centered mb-0">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Lampiran / Referensi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($letter->references as $reference)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        @if ($reference->file)
+                                            <td><a class="text-blue-600" href="{{ asset('storage/'.$reference->file) }}">{{ $reference->file }}</a></td>
+                                        @else
+                                            <td>{{ $reference->reference->letter_number }} | {{ $reference->reference->regarding }}</td>
+                                        @endif
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
                 <div class="flex items-center border-b uppercase px-3 pt-3 pb-[1.1rem]">
                     <h1 class="text-base font-semibold">Isi Memo</h1>
                 </div>

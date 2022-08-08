@@ -2,7 +2,7 @@
 <div class="leftside-menu">
 
     <!-- LOGO -->
-    <a href="" class="logo text-center logo-light">
+    <a href="{{ route('dashboard') }}" class="logo text-center logo-light">
         <span class="h-[70px] flex justify-center items-center">
             <i class="uil-envelope-edit text-3xl text-white"></i>
         </span>
@@ -16,7 +16,7 @@
             <li class="side-nav-title side-nav-item">Navigation</li>
 
             <li class="side-nav-item">
-                <a href="#" class="side-nav-link">
+                <a href="{{ route('dashboard') }}" class="side-nav-link">
                     <i class="uil-apps"></i>
                     <span> Dashboard </span>
                 </a>
