@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Letter;
 use App\Models\LetterCategory;
+use App\Models\LetterType;
 use Illuminate\Http\Request;
 
 class IncomingMailController extends Controller
@@ -62,15 +63,25 @@ class IncomingMailController extends Controller
             'date_of_letter' => ['required'],
             'date_of_entry' => ['required'],
             'destination' => ['required'],
+            'attachement' => ['file'],
         ]);
 
+
+        $letter_category = LetterCategory::find($this->letterCategory);
+        $destination = Employee::with('user')->find($request->input('destination'));
         $copy = $request->input('copy', false);
+
+        $path = 'letters/' . $destination->user->name . '/' . $letter_category->name . '/attachments';
+
+        $attachment = $request->file('attachment');
+        $attachment = $attachment->storeAs($path, $attachment->getClientOriginalName(), 'public');
 
         $letter = new Letter($request->all());
 
         $letter->category()->associate($this->letterCategory);
         $letter->type()->associate($request->input('letter_type'));
-        $letter->destination()->associate($request->input('destination'));
+        $letter->destination()->associate($destination);
+        $letter->attachment = $attachment;
 
         if ($copy) {
             $letter->carbonCopy()->associate($request->input('copy'));
