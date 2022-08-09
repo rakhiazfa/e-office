@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Authenticated\DashboardController;
+use App\Http\Controllers\PreviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth')->get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/preview', PreviewController::class)->name('preview');
 
 /* ====================================
 # Auth routes

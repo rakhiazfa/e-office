@@ -84,19 +84,23 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Lampiran / Referensi</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($letter->references as $reference)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $reference->label ? $reference->label : $reference->reference->letter_number . ' | ' . $reference->reference->regarding }}</td>
                                         @if ($reference->file)
-                                            <td><a class="text-blue-600" href="{{ asset('storage/'.$reference->file) }}">{{ $reference->file }}</a></td>
+                                            <td><a class="text-blue-600" href="{{ route('preview', [
+                                                'path' => $reference->file
+                                            ]) }}">Lihat Lampiran</a></td>
                                         @else
                                             <td>
-                                                <a class="text-blue-600" href="{{ route($reference->reference_type, [
+                                                <a class="text-blue-600" href="{{ route($reference->reference_route, [
                                                     'id' => $reference->reference->id,
-                                                ]) }}">{{ $reference->reference->letter_number }} | {{ $reference->reference->regarding }}</a>
+                                                ]) }}">Lihat Lampiran</a>
                                             </td>
                                         @endif
                                     </tr>

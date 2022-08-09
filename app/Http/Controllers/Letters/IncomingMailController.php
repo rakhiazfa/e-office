@@ -91,7 +91,7 @@ class IncomingMailController extends Controller
             $index = 0;
 
             foreach ($attachments as $attachment) {
-                $file = $attachment->storeAs($path, date('d M Y H i s') . ' - ' . $attachment->getClientOriginalName(), 'public');
+                $file = $attachment->storeAs($path, date('d M Y H i s') . ' - ' . $attachment->getClientOriginalName());
 
                 $letter->references()->create([
                     'file' => $file,
@@ -164,7 +164,7 @@ class IncomingMailController extends Controller
         $letter = Letter::find($id);
 
         foreach ($letter->references()->where('file', '!=', null)->get() as $reference) {
-            Storage::disk('public')->delete($reference->file);
+            Storage::delete($reference->file);
         }
 
         $letter->delete();
