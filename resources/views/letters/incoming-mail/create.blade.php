@@ -96,8 +96,14 @@
                         <div class="row" id="attachments">
                             <div class="col-12 mb-3">
                                 <label class="text-xs ml-1">File Attachment</label>
-                                <input type="file" class="form-control" name="attachments[]">
+                                <div class="flex flex-col md:flex-row items-center gap-3">
+                                    <input type="file" class="form-control" name="attachments[]">
+                                    <input type="text" class="form-control" name="labels[]" placeholder="Label File">
+                                </div>
                                 @error('attachment')
+                                    <p class="invalid">{{ $message }}</p>
+                                @enderror
+                                @error('labels')
                                     <p class="invalid">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -113,8 +119,10 @@
     <script>
         let fileInput = `
             <div class="col-12 mb-3">
-                <label class="text-xs ml-1">File Attachment</label>
-                <input type="file" class="form-control" name="attachments[]">
+                <div class="flex flex-col md:flex-row items-center gap-3">
+                    <input type="file" class="form-control" name="attachments[]">
+                    <input type="text" class="form-control" name="labels[]" placeholder="Label File">
+                </div>
             </div>
         `;
 

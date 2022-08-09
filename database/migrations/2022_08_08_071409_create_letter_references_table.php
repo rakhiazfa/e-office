@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('letter_references', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('letter_id');
+            $table->string('label')->nullable();
             $table->string('file')->nullable();
+            $table->string('reference_route')->nullable();
             $table->unsignedBigInteger('reference_id')->nullable();
             $table->timestamps();
 

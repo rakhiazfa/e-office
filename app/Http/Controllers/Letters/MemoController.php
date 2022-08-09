@@ -96,6 +96,7 @@ class MemoController extends Controller
 
         $references = $request->input('references', false);
         $attachments = $request->file('attachments');
+        $labels = $request->input('labels', false);
 
         $letter = new Letter($request->all());
 
@@ -112,19 +113,38 @@ class MemoController extends Controller
 
         if ($references) {
             foreach ($references as $reference) {
+                $reference = Letter::find($reference);
+                $referenceType = 'incoming-mails.show';
+
+                if ($reference->category->name === 'Surat Masuk') {
+                    $referenceType = 'incoming-mails.show';
+                } elseif ($reference->category->name === 'Surat Keluar') {
+                    $referenceType = 'outgoing-mails.show';
+                } elseif ($reference->category->name === 'E-Memo') {
+                    $referenceType = 'memo.show';
+                } else {
+                    $referenceType = 'incoming-mails.show';
+                }
+
                 $letter->references()->create([
-                    'reference_id' => $reference,
+                    'reference_id' => $reference->id,
+                    'reference_type' => $referenceType,
                 ]);
             }
         }
 
         if ($attachments) {
+            $index = 0;
+
             foreach ($attachments as $attachment) {
-                $attachment = $attachment->storeAs($path, date('d M Y H i s') . ' - ' . $attachment->getClientOriginalName(), 'public');
+                $file = $attachment->storeAs($path, date('d M Y H i s') . ' - ' . $attachment->getClientOriginalName(), 'public');
 
                 $letter->references()->create([
-                    'file' => $attachment,
+                    'file' => $file,
+                    'label' => $labels[$index] ? $labels[$index] : pathinfo($attachment->getClientOriginalName(), PATHINFO_FILENAME),
                 ]);
+
+                $index++;
             }
         }
 

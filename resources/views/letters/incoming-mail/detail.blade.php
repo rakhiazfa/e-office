@@ -112,14 +112,14 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama File</th>
+                                    <th>Lampiran</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($letter->references as $reference)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><a class="text-blue-600" href="{{ asset('storage/'.$reference->file) }}">{{ $reference->file }}</a></td>
+                                        <td><a class="text-blue-600" href="{{ asset('storage/'.$reference->file) }}">Lihat Lampiran</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

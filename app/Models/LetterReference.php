@@ -9,7 +9,7 @@ class LetterReference extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['file', 'reference_id'];
+    protected $fillable = ['file', 'label', 'reference_type', 'reference_id'];
 
     /**
      * Get letter from the reference

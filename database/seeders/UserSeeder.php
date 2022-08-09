@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // 1
         $user = User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
@@ -23,5 +24,32 @@ class UserSeeder extends Seeder
         ]);
 
         $user->assignRole('admin');
+
+        // 2
+        $user = User::create([
+            'name' => 'Rakhi Azfa Rifansya',
+            'email' => 'rakhiazfa0421@gmail.com',
+            'password' => 'rakhiazfa0421',
+        ]);
+
+        $user->assignRole('director');
+
+        // 3
+        $user = User::create([
+            'name' => 'Chyntia Adela',
+            'email' => 'chyntia.adela@gmail.com',
+            'password' => 'chyntia.adela',
+        ]);
+
+        $user->assignRole('director');
+
+        // 4
+        $user = User::create([
+            'name' => 'Fauzan Achmad',
+            'email' => 'fauzan.achmad@gmail.com',
+            'password' => 'fauzan.achmad',
+        ]);
+
+        $user->assignRole('division');
     }
 }

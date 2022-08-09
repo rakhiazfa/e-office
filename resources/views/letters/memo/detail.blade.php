@@ -93,7 +93,11 @@
                                         @if ($reference->file)
                                             <td><a class="text-blue-600" href="{{ asset('storage/'.$reference->file) }}">{{ $reference->file }}</a></td>
                                         @else
-                                            <td>{{ $reference->reference->letter_number }} | {{ $reference->reference->regarding }}</td>
+                                            <td>
+                                                <a class="text-blue-600" href="{{ route($reference->reference_type, [
+                                                    'id' => $reference->reference->id,
+                                                ]) }}">{{ $reference->reference->letter_number }} | {{ $reference->reference->regarding }}</a>
+                                            </td>
                                         @endif
                                     </tr>
                                 @endforeach

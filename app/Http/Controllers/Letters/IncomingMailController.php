@@ -73,7 +73,7 @@ class IncomingMailController extends Controller
         $path = 'letters/' . $destination->user->name . '/' . $letter_category->name . '/attachments';
 
         $attachments = $request->file('attachments', false);
-
+        $labels = $request->input('labels', false);
 
         $letter = new Letter($request->all());
 
@@ -88,12 +88,17 @@ class IncomingMailController extends Controller
         $letter->save();
 
         if ($attachments) {
+            $index = 0;
+
             foreach ($attachments as $attachment) {
-                $attachment = $attachment->storeAs($path, date('d M Y H i s') . ' - ' . $attachment->getClientOriginalName(), 'public');
+                $file = $attachment->storeAs($path, date('d M Y H i s') . ' - ' . $attachment->getClientOriginalName(), 'public');
 
                 $letter->references()->create([
-                    'file' => $attachment,
+                    'file' => $file,
+                    'label' => $labels[$index] ? $labels[$index] : pathinfo($attachment->getClientOriginalName(), PATHINFO_FILENAME),
                 ]);
+
+                $index++;
             }
         }
 
