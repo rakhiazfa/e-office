@@ -113,13 +113,17 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Lampiran</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($letter->references as $reference)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><a class="text-blue-600" href="{{ asset('storage/'.$reference->file) }}">Lihat Lampiran</a></td>
+                                        <td>{{ $reference->label ? $reference->label : "" }}</td>
+                                        <td><a class="text-blue-600" href="{{ route('preview', [
+                                            'path' => $reference->file
+                                        ]) }}">Lihat Lampiran</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

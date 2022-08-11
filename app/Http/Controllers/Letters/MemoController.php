@@ -114,21 +114,19 @@ class MemoController extends Controller
         if ($references) {
             foreach ($references as $reference) {
                 $reference = Letter::find($reference);
-                $referenceType = 'incoming-mails.show';
+                $referenceRoute = 'incoming-mails.show';
 
-                if ($reference->category->name === 'Surat Masuk') {
-                    $referenceType = 'incoming-mails.show';
-                } elseif ($reference->category->name === 'Surat Keluar') {
-                    $referenceType = 'outgoing-mails.show';
-                } elseif ($reference->category->name === 'E-Memo') {
-                    $referenceType = 'memo.show';
-                } else {
-                    $referenceType = 'incoming-mails.show';
+                if ($reference->category->id == 1) {
+                    $referenceRoute = 'incoming-mails.show';
+                } elseif ($reference->category->id == 2) {
+                    $referenceRoute = 'outgoing-mails.show';
+                } elseif ($reference->category->id == 3) {
+                    $referenceRoute = 'memo.show';
                 }
 
                 $letter->references()->create([
                     'reference_id' => $reference->id,
-                    'reference_type' => $referenceType,
+                    'reference_route' => $referenceRoute,
                 ]);
             }
         }
@@ -137,7 +135,7 @@ class MemoController extends Controller
             $index = 0;
 
             foreach ($attachments as $attachment) {
-                $file = $attachment->storeAs($path, date('d M Y H i s') . ' - ' . $attachment->getClientOriginalName(), 'public');
+                $file = $attachment->storeAs($path, date('d M Y H i s') . ' - ' . $attachment->getClientOriginalName());
 
                 $letter->references()->create([
                     'file' => $file,
@@ -212,7 +210,7 @@ class MemoController extends Controller
         $letter = Letter::find($id);
 
         foreach ($letter->references()->where('file', '!=', null)->get() as $reference) {
-            Storage::disk('public')->delete($reference->file);
+            Storage::delete($reference->file);
         }
 
         $letter->delete();
