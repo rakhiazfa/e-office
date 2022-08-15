@@ -65,15 +65,6 @@
                                 <a href="{{ route('jobs') }}">Jabatan</a>
                             </li>
                             <li>
-                                <a href="#">Jenis Surat</a>
-                            </li>
-                            <li>
-                                <a href="#">Instansi</a>
-                            </li>
-                            <li>
-                                <a href="#">Rapat</a>
-                            </li>
-                            <li>
                                 <a href="{{ route('employees') }}">Karyawan</a>
                             </li>
                         </ul>

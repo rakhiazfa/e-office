@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Authenticated;
 
 use App\Http\Controllers\Controller;
+use App\Models\LetterCategory;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,6 +15,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $letterCategories = LetterCategory::with('letters')->get();
+
+        return view('dashboard', compact('letterCategories'));
     }
 }

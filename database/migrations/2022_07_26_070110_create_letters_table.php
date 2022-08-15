@@ -51,7 +51,7 @@ return new class extends Migration
             $table->foreign('destination_id')->references('id')->on('employees')->nullOnDelete();
 
             $table->foreign('creator_id')->references('id')->on('employees')->nullOnDelete();
-            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('company_id')->references('id')->on('companies')->nullOnDelete();
         });
     }
 

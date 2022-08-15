@@ -29,7 +29,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 col-md-6 mb-3">
-                                <select type="text" class="field" name="job_id" data-selected="{{ $job->parent->id }}" disabled>
+                                <select type="text" class="field" name="job_id" data-selected="{{ $job->parent->id ?? '' }}" disabled>
                                 </select>
                             </div>
                             <div class="col-12 mb-3">

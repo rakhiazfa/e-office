@@ -18,8 +18,7 @@
     <link href="{{ asset('assets/css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="dark-style" />
 </head>
 
-<body class="loading authentication-bg"
-    data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+<body class="loading authentication-bg" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
     <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
         <div class="container">
             <div class="row justify-content-center">
@@ -44,10 +43,9 @@
                                 @csrf
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Email address</label>
-                                    <input class="form-control" type="email" id="emailaddress" name="email"
-                                        placeholder="Enter your email">
+                                    <input class="form-control" type="email" id="emailaddress" name="email" placeholder="Enter your email">
                                     @error('email')
-                                        <p class="fs-6 text-danger">{{ $message }}</p>
+                                    <p class="fs-6 text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
 
@@ -56,29 +54,27 @@
                                             password?</small></a>
                                     <label for="password" class="form-label">Password</label>
                                     <div class="input-group input-group-merge">
-                                        <input type="password" id="password" class="form-control" name="password"
-                                            placeholder="Enter your password">
+                                        <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password">
                                         <div class="input-group-text" data-password="false">
                                             <span class="password-eye"></span>
                                         </div>
                                     </div>
                                     @error('password')
-                                        <p class="fs-6 text-danger">{{ $message }}</p>
+                                    <p class="fs-6 text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     {!! NoCaptcha::renderJs() !!}
                                     {!! NoCaptcha::display() !!}
                                     @error('g-recaptcha-response')
                                         <div class="fs-6 text-danger">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                </div> -->
 
                                 <div class="mb-3 mt-3">
                                     <div class="form-check">
-                                        <input type="checkbox" name="remember" class="form-check-input"
-                                            id="checkbox-signin" checked>
+                                        <input type="checkbox" name="remember" class="form-check-input" id="checkbox-signin" checked>
                                         <label class="form-check-label" for="checkbox-signin">Remember me</label>
                                     </div>
                                 </div>
@@ -94,8 +90,7 @@
 
                     <div class="row mt-3">
                         <div class="col-12 text-center">
-                            <p class="text-muted">Don't have an account? <a href="pages-register.html"
-                                    class="text-muted ms-1"><b>Sign Up</b></a></p>
+                            <p class="text-muted">Don't have an account? <a href="pages-register.html" class="text-muted ms-1"><b>Sign Up</b></a></p>
                         </div> <!-- end col -->
                     </div>
                     <!-- end row -->
