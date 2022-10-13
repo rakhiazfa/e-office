@@ -12,7 +12,7 @@
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 
     {{-- App CSS --}}
-    @vite('./resources/css/app.css')
+    @vite('resources/css/app.css')
     
     <title>{{ $title }}</title>
 </head>
@@ -22,7 +22,7 @@
     {{ $slot }}
 
     {{-- App JS --}}
-    @vite('./resources/js/app.js')
+    @vite('resources/js/app.js')
 </body>
 
 </html>

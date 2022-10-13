@@ -30,7 +30,7 @@
     <link href="{{ asset('assets/css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="dark-style" />
     
     <!-- App CSS -->
-    @vite('./resources/css/app.css')
+    @vite('resources/css/app.css')
     
     <title>{{ $title }}</title>
 
@@ -96,7 +96,7 @@
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
 
     <!-- App JS -->
-    @vite('./resources/js/app.js')
+    @vite('resources/js/app.js')
 </body>
 
 </html>
