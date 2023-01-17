@@ -4,7 +4,7 @@
     <!-- LOGO -->
     <a href="{{ route('dashboard') }}" class="logo text-center logo-light">
         <span class="h-[70px] flex justify-center items-center">
-            <i class="uil-envelope-edit text-3xl text-white"></i>
+            <img class="w-[145px]" src="{{ asset('assets/images/EOFFICE.png') }}" alt="">
         </span>
     </a>
 
@@ -23,8 +23,8 @@
             </li>
 
             <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarSurat" aria-expanded="false"
-                    aria-controls="sidebarSurat" class="side-nav-link">
+                <a data-bs-toggle="collapse" href="#sidebarSurat" aria-expanded="false" aria-controls="sidebarSurat"
+                    class="side-nav-link">
                     <i class="uil-envelope-edit"></i>
                     <span> Surat </span>
                     <span class="menu-arrow"></span>
@@ -43,15 +43,11 @@
                         <li>
                             <a href="{{ route('notulens') }}">Notulen</a>
                         </li>
-                        <li>
-                            <a href="{{ route('dispositions') }}">Disposisi</a>
-                        </li>
                     </ul>
                 </div>
             </li>
 
             @role('admin')
-                
                 <li class="side-nav-item">
                     <a data-bs-toggle="collapse" href="#sidebarMasterData" aria-expanded="false"
                         aria-controls="sidebarMasterData" class="side-nav-link">
@@ -70,7 +66,6 @@
                         </ul>
                     </div>
                 </li>
-
             @endrole
 
             <li class="side-nav-item">
