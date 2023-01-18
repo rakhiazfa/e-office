@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
         $user = User::create([
             'name' => 'Rakhi Azfa Rifansya',
             'email' => 'rakhiazfa0421@gmail.com',
-            'password' => 'rakhiazfa0421',
+            'password' => Hash::make('rakhiazfa0421'),
         ]);
 
         $user->assignRole('director');
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
         $user = User::create([
             'name' => 'Chyntia Adela',
             'email' => 'chyntia.adela@gmail.com',
-            'password' => 'chyntia.adela',
+            'password' => Hash::make('chyntia.adela'),
         ]);
 
         $user->assignRole('director');
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
         $user = User::create([
             'name' => 'Fauzan Achmad',
             'email' => 'fauzan.achmad@gmail.com',
-            'password' => 'fauzan.achmad',
+            'password' => Hash::make('fauzan.achmad'),
         ]);
 
         $user->assignRole('division');
