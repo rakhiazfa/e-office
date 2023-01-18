@@ -81,6 +81,8 @@ class MemoController extends Controller
             'destination' => ['required'],
             'regarding' => ['required'],
             'message' => ['required'],
+            'attachments.*' => ['nullable', 'mimes:pdf'],
+            'labels.*' => ['nullable'],
         ]);
 
         $request->merge([

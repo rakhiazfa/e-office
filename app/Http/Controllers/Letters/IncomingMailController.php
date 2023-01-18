@@ -9,6 +9,7 @@ use App\Models\LetterCategory;
 use App\Models\LetterType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class IncomingMailController extends Controller
 {
@@ -56,7 +57,7 @@ class IncomingMailController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validate = $request->validate([
             'letter_type' => ['required'],
             'sender_name' => ['required'],
             'regarding' => ['required'],
@@ -64,6 +65,8 @@ class IncomingMailController extends Controller
             'date_of_letter' => ['required'],
             'date_of_entry' => ['required'],
             'destination' => ['required'],
+            'attachments.*' => ['nullable', 'mimes:pdf'],
+            'labels.*' => ['nullable'],
         ]);
 
         $letter_category = LetterCategory::find($this->letterCategory);
