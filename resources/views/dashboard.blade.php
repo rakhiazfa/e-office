@@ -13,15 +13,15 @@
     <div class="row">
 
         @foreach ($letterCategories as $letterCategory)
-            
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="header-title text-center">{{ $letterCategory->name }}</div>
-                        <p class="text-3xl text-center font-semibold">{{ count($letterCategory->letters) }}</p>
-                    </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="header-title text-center">{{ $letterCategory->name }}</div>
+                    <p class="text-3xl text-center font-semibold">{{ count($letterCategory->letters) }}</p>
                 </div>
             </div>
+        </div>
 
         @endforeach
 
