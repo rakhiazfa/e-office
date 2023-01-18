@@ -23,6 +23,6 @@ class LetterCategorySeeder extends Seeder
 
         LetterCategory::create(['name' => 'Notulen']);
 
-        LetterCategory::create(['name' => 'Disposisi']);
+        // LetterCategory::create(['name' => 'Disposisi']);
     }
 }

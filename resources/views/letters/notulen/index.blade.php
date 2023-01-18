@@ -17,9 +17,9 @@
     <!-- /Page Title -->
 
     @if(session()->has('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session()->get('success') }}    
-        </div> 
+    <div class="alert alert-success" role="alert">
+        {{ session()->get('success') }}
+    </div>
     @endif
 
     <div class="row">
@@ -54,11 +54,13 @@
                                     <td>
                                         <div class="table-action flex justify-center items-center gap-3">
                                             <a href="{{ route('notulens.show', ['id' => $letter->id]) }}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                            @role('admin')
                                             <form action="{{ route('notulens.destroy', ['id' => $letter->id]) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="action-icon" onclick="return confirm('Yakin ingin menghapus surat ini?')"><i class="mdi mdi-delete"></i></button>
                                             </form>
+                                            @endrole
                                         </div>
                                     </td>
                                 </tr>
